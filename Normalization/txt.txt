@@ -1,1 +1,64 @@
+📘 Quick Notes on Normalization 
+🔶 1. Purpose of Normalization
+Eliminate data redundancy
 
+Avoid insertion, update, and deletion anomalies
+
+Improve data integrity
+
+Achieved by organizing data into normal forms
+
+🔶 2. Types of Anomalies
+Anomaly	Cause
+Insert Anomaly	Can’t insert data without other data
+Update Anomaly	Same data repeated in many rows
+Delete Anomaly	Deleting one data causes loss of another
+
+🔶 3. Normal Forms Summary
+Normal Form	Fixes	Key Point
+1NF	Repeating/multivalued groups	All values must be atomic (single-valued)
+2NF	Partial dependencies	Every non-key attribute depends on whole PK
+3NF	Transitive dependencies	No non-key attribute depends on another non-key
+BCNF	Determinant not being candidate key	Every determinant must be a candidate key
+
+🔶 4. Functional & Transitive Dependencies
+Functional Dependency:
+A → B: Value of A determines B
+
+Transitive Dependency:
+A → B, B → C ⇒ Then A → C (violates 3NF if C is non-key)
+
+🔶 5. Candidate Key vs Primary Key
+Candidate Key: Any minimal set of columns that can uniquely identify a row
+
+Primary Key: One selected candidate key used as the main identifier
+
+All determinants in BCNF must be candidate keys
+
+🔶 6. BCNF vs 3NF
+3NF: Allows non-candidate determinant if dependent is a prime attribute
+
+BCNF: No exception – every determinant must be a candidate key
+
+🔶 7. Denormalization
+Introduce redundancy on purpose
+
+Used to improve performance (e.g., reduce joins)
+
+Useful in read-heavy systems, reporting, dashboards
+
+🔶 8. Real-World Clues to Detect NF Violations
+Violation Type	Clue Example
+1NF Violation	Multivalued attributes (e.g., Courses: Java, C++)
+2NF Violation	Attributes depend only on part of composite key
+3NF Violation	Non-key depends on another non-key
+BCNF Violation	Non-candidate key determining something
+
+✅ Summary Tips:
+Check primary key (single or composite)
+
+See what depends on what
+
+Look for partial and transitive dependencies
+
+Ask: Is a non-candidate key a determinant? → BCNF violation!
